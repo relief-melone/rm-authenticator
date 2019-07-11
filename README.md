@@ -64,3 +64,21 @@ docker run \
   -p 8081:8081
   reliefmelone/rm-authenticator:latest
 ```
+
+### Usage from Front-End
+
+After the Authenticator has been Started you can use it from your frontend. E.g. for the Google Provider, just create a link to login
+
+```html
+<a href="http://localhost:8081/auth/google">Login</a>
+```
+
+The Authenticator will handle everything from here on and at the end redirect you to your Website. Here you will find the connect.sid Cookie. Now to get the UserInfo behind that session just make a call to the API (i will use axios in this example)
+
+```js
+axios
+  .get("http://localhost:8081/auth/userinfo", { withCredentials: true })
+  .then(res => {
+    // Your Application Logic
+  });
+```
