@@ -1,9 +1,8 @@
 FROM node:10-alpine
 USER root
 
-WORKDIR /app
 COPY . .
-
+WORKDIR /app
 RUN npm --version && node --version
 
 RUN npm install
