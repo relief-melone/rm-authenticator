@@ -21,6 +21,8 @@ In the Main section you set the Variables that apply to all providers (\* are re
 
 **APPLICATION_CALLBACK_HOST\*:** Where your front-end resides. This will be the host the authenticator will redirect you to. It is also set automatically in the Repose Access-Control-Allowed-Origin header. Defaults to http://localhost:8080 so it's required if you want to use it for more than testing.
 
+**APPLICATION_LOGOUT_PATH\*:** This is the path the Authenticator will redirect you to when the user logs out. Defaults to /logout
+
 #### Google
 
 The following section describes the Environment Variables to configure the Google. Required here only applies if you choose to enable Google.
@@ -81,4 +83,10 @@ axios
   .then(res => {
     // Your Application Logic
   });
+```
+
+To logout simply create a Link to the logout endpoint.
+
+```html
+<a href="http://localhost:8081/auth/logout"> Logout </a>
 ```
