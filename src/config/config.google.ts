@@ -25,7 +25,9 @@ export function getGoogleCallbackPath(env = process.env): string {
 }
 
 export function getCallbackURL(env = process.env): string {
-  return `${mainConfig.authenticatorCallbackHost}${getGoogleCallbackPath(env)}`;
+  return `${
+    mainConfig.authenticatorCallbackHost
+  }/auth/google${getGoogleCallbackPath(env)}`;
 }
 
 export function getApplicationSuccessCallbackPath(env = process.env): string {
