@@ -4,14 +4,11 @@ USER root
 WORKDIR /app
 COPY . .
 
-RUN npm config set proxy $HTTP_PROXY && \
-    npm config set https-proxy $HTTPS_PROXY && \
-    npm --version && node --version
+RUN npm --version && node --version
 
 RUN npm install
-RUN ./node_modules/.bin/tsc -p ./tsconfig.build.prod.json
+RUN ./node_modules/.bin/tsc --watch false
 
-EXPOSE 8080
 EXPOSE 8081
 
 CMD ["npm", "start"]
