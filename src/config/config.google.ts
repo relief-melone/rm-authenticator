@@ -1,31 +1,27 @@
 import mainConfig from "./config.main";
+import { Provider } from "../interfaces/interface.provider";
+import { getCallbackURL, getCallbackPath } from "./functions/getCallback";
+import { getEnabled } from "./functions/getEnabled";
+import { getClientId, getClientSecret } from "./functions/getClient";
 
 export function getGoogleEnabled(env = process.env): boolean {
-  return env.GOOGLE_ENABLED === "true";
+  return getEnabled(Provider.google, env);
 }
 
-export function getClientId(env = process.env): string {
-  if (!env.GOOGLE_CLIENT_ID) throw new Error("GOOGLE_CLIENT_ID has to be set!");
-  return env.GOOGLE_CLIENT_ID;
+export function getGoogleClientId(env = process.env): string {
+  return getClientId(Provider.google, env);
 }
 
-export function getClientSecret(env = process.env): string {
-  if (!env.GOOGLE_CLIENT_SECRET)
-    throw new Error("GOOGLE_CLIENT_SECRET has to be set!");
-  return env.GOOGLE_CLIENT_SECRET;
+export function getGoogleClientSecret(env = process.env): string {
+  return getClientSecret(Provider.google, env);
 }
 
 export function getGoogleCallbackPath(env = process.env): string {
-  if (!env.GOOGLE_CALLBACK_PATH) return "/callback";
-  if (env.GOOGLE_CALLBACK_PATH.indexOf("/") !== 0)
-    return `/${env.GOOGLE_CALLBACK_PATH}`;
-  return env.GOOGLE_CALLBACK_PATH;
+  return getCallbackPath(Provider.google, env);
 }
 
-export function getCallbackURL(env = process.env): string {
-  return `${
-    mainConfig.authenticatorCallbackHost
-  }/auth/google${getGoogleCallbackPath(env)}`;
+export function getGoogleCallbackURL(env = process.env): string {
+  return getCallbackURL(Provider.google, env);
 }
 
 export function getApplicationSuccessCallbackPath(env = process.env): string {
@@ -67,10 +63,10 @@ export function getScope(env = process.env): string[] {
 
 export default (getGoogleEnabled()
   ? {
-      clientId: getClientId(),
-      clientSecret: getClientSecret(),
+      clientId: getGoogleClientId(),
+      clientSecret: getGoogleClientSecret(),
       callbackPath: getGoogleCallbackPath(),
-      callbackURL: getCallbackURL(),
+      callbackURL: getGoogleCallbackURL(),
       applicationCallbackPaths: {
         success: getApplicationSuccessCallbackPath(),
         failure: getApplicationFailureCallbackPath()
