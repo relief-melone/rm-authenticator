@@ -17,7 +17,7 @@
     "alpac-authenticator"
   ],
   "author": "FG-760",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/express": "^4.17.0",
