@@ -1,17 +1,18 @@
 import { Router, Request, Response } from "express";
 import passport from "passport";
-import GoogleConfig, { getGoogleEnabled } from "../config/config.google";
+import googleConfig from "../config/config.google";
+import mainConfig from "../config/config.main";
 
 const router = Router();
-const googleConfig = GoogleConfig();
 
 // Google
-if (getGoogleEnabled()) {
-  router.get("/google", (req, res, next) => {
+if (googleConfig !== null) {
+  router.get(
+    "/google",
     passport.authenticate("google", {
       scope: googleConfig.scope
-    })(req, res, next);
-  });
+    })
+  );
 
   router.get(
     `/google${googleConfig.callbackPath}`,
@@ -19,18 +20,27 @@ if (getGoogleEnabled()) {
       failureRedirect: googleConfig.applicationCallbackURLs.failure
     }),
     (req: Request, res: Response) => {
-      res.redirect(googleConfig.applicationCallbackURLs.success);
+      if (googleConfig) {
+        res.redirect(googleConfig.applicationCallbackURLs.success);
+      }
     }
   );
 }
 
 // Facebook
 
+// UserInfo
 router.get("/userinfo", (req, res, next) => {
   if (!req.session) return res.status(401).send();
   if (!req.session.passport) return res.status(401).send();
   if (!req.session.passport.user) return res.status(401).send();
   res.json(req.session.passport.user).send();
+});
+
+// Logout
+router.get("/logout", (req, res, next) => {
+  req.logout();
+  res.redirect(mainConfig.applicationLogoutURL);
 });
 
 export default router;

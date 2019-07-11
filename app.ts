@@ -7,21 +7,13 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./src/routes/auth";
 
-import MainConfig from "./src/config/config.main";
-import ConfigGoogle, { getGoogleEnabled } from "./src/config/config.google";
+import mainConfig from "./src/config/config.main";
 
 const app = express();
-const config = {
-  main: MainConfig(),
-  google: getGoogleEnabled() ? ConfigGoogle() : null
-};
 
 // Set Response Headers
 app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    config.main.applicationCallbackHost
-  );
+  res.header("Access-Control-Allow-Origin", mainConfig.applicationCallbackHost);
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",

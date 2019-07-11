@@ -1,6 +1,4 @@
-import MainConfig from "./config.main";
-
-const mainConfig = MainConfig();
+import mainConfig from "./config.main";
 
 export function getGoogleEnabled(env = process.env): boolean {
   return env.GOOGLE_ENABLED === "true";
@@ -67,18 +65,20 @@ export function getScope(env = process.env): string[] {
   return env.GOOGLE_SCOPE.split(" ");
 }
 
-export default () => ({
-  consumerKey: getClientId(),
-  consumerSecret: getClientSecret(),
-  callbackPath: getGoogleCallbackPath(),
-  callbackURL: getCallbackURL(),
-  applicationCallbackPaths: {
-    success: getApplicationSuccessCallbackPath(),
-    failure: getApplicationFailureCallbackPath()
-  },
-  applicationCallbackURLs: {
-    success: getApplicationSuccessCallbackURL(),
-    failure: getApplicationFailureCallbackURL()
-  },
-  scope: getScope()
-});
+export default (getGoogleEnabled()
+  ? {
+      clientId: getClientId(),
+      clientSecret: getClientSecret(),
+      callbackPath: getGoogleCallbackPath(),
+      callbackURL: getCallbackURL(),
+      applicationCallbackPaths: {
+        success: getApplicationSuccessCallbackPath(),
+        failure: getApplicationFailureCallbackPath()
+      },
+      applicationCallbackURLs: {
+        success: getApplicationSuccessCallbackURL(),
+        failure: getApplicationFailureCallbackURL()
+      },
+      scope: getScope()
+    }
+  : null);
