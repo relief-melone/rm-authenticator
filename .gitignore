@@ -1,0 +1,23 @@
+# JavaScript-Files are Compiled files
+*.js
+*.js.map
+
+# no dist folder
+/dist
+
+# dependencies
+/node_modules
+package-lock.json
+
+# test results
+/coverage
+/.nyc_output
+
+# temp
+temp/
+
+# no env vars for vscode
+.vscode/.env
+
+# no certificate information
+/cert
