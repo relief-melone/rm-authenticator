@@ -61,5 +61,6 @@ docker run \
   -e GOOGLE_ENABLED=true \
   -e GOOGLE_CLIENT_ID=my.secret.id \
   -e GOOGLE_CLIENT_SECRET=my.super.secret \
+  -p 8081:8081
   reliefmelone/rm-authenticator:latest
 ```

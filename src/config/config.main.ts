@@ -1,5 +1,4 @@
 import expressConfig from "./config.express";
-import { getCallbackURL } from "./config.google";
 
 function getAuthenticatorCallbackHost(env = process.env): string {
   return (

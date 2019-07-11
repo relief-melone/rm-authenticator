@@ -29,13 +29,7 @@ export function getCallbackURL(env = process.env): string {
 }
 
 export function getApplicationSuccessCallbackPath(env = process.env): string {
-  if (!env.GOOGLE_APPLICATION_SUCCESS_CALLBACK_PATH) {
-    const defaultCallbackPath = "/";
-    console.log(
-      `Warning: No GOOGLE_APPLICATION_SUCCESS_CALLBACK_URL has been set. Using default: ${defaultCallbackPath}`
-    );
-    return defaultCallbackPath;
-  }
+  if (!env.GOOGLE_APPLICATION_SUCCESS_CALLBACK_PATH) return "/";
   let fixedPath: string =
     env.GOOGLE_APPLICATION_SUCCESS_CALLBACK_PATH.indexOf("/") === 0
       ? env.GOOGLE_APPLICATION_SUCCESS_CALLBACK_PATH
@@ -45,13 +39,7 @@ export function getApplicationSuccessCallbackPath(env = process.env): string {
 }
 
 export function getApplicationFailureCallbackPath(env = process.env): string {
-  if (!env.GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH) {
-    const defaultCallbackPath = "/failure";
-    console.log(
-      `Warning: No GOOGLE_APPLICATION_FAILURE_CALLBACK_URL has been set. Using default: ${defaultCallbackPath}`
-    );
-    return defaultCallbackPath;
-  }
+  if (!env.GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH) return "/failure";
   let fixedPath: string =
     env.GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH.indexOf("/") === 0
       ? env.GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH

@@ -8,7 +8,6 @@ const googleConfig = GoogleConfig();
 // Google
 if (getGoogleEnabled()) {
   router.get("/google", (req, res, next) => {
-    console.log(req);
     passport.authenticate("google", {
       scope: googleConfig.scope
     })(req, res, next);
