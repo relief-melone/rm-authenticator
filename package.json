@@ -1,5 +1,5 @@
 {
-  "name": "alpac-authenticator",
+  "name": "rm-authenticator",
   "version": "1.0.0",
   "description": "Authentication Application",
   "main": "./dist/app.js",
@@ -10,11 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://q282998@atc.bmwgroup.net/bitbucket/scm/amvreality/alpac-authenticator.git"
+    "url": "https://github.com/relief-melone/rm-authenticator"
   },
   "keywords": [
-    "alpac",
-    "alpac-authenticator"
+    "authentication",
+    "docker",
+    "container",
+    "oauth",
+    "google",
+    "facebook"
   ],
   "author": "FG-760",
   "license": "MIT",
