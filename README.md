@@ -95,7 +95,7 @@ To logout simply create a Link to the logout endpoint.
 <a href="http://localhost:8081/auth/logout"> Logout </a>
 ```
 
-###To Do
+### To Do
 
 As of now this Authenticator is still in Beta. Planned to be implemented in the near future is
 
