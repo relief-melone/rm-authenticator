@@ -37,9 +37,11 @@ The following section describes the Environment Variables to configure the Googl
 
 **GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH:** The Path the Authenticator will redirect the user to if the login fails. By default it's "/failure"
 
-**GOOGLE_SCOPE:** The scope that will be used. By default the scopes profile, email and openid get requested
+**GOOGLE_APPLICATION_LOGOUT_CALLBACK_PATH:** The Path the Authenticator will redirect the user to if he logs out. By default it's "/logout"
 
-**GOOGLE_CALLBACK_PATH:** The path Google will redirect you to on this Authenticator. If your application does occupy this endpoint we suggest you leave it at it's default /callback so the redirect URL will be http://localhost:8081/auth/google/callback by default. As of this time /auth/google is fixed and cannot be changed
+**GOOGLE_SCOPE:** The scope that will be used. By default the scopes are "https://www.googleapis.com/auth/userinfo.profile" and "https://www.googleapis.com/auth/userinfo.email" get requested. Enter without space separated by ;
+
+**GOOGLE_CALLBACK_PATH:** The path Google will redirect you to on this Authenticator. If your application does occupy this endpoint we suggest you leave it at it's default /callback so the redirect URL will be http://localhost:8081/auth/google/callback by default. As of this time /auth/google is fixed and cannot be changed, so if you set this to /my/callback/path the redirect will go to localhost:8081/auth/google/my/callback/path
 
 ### Use directly
 

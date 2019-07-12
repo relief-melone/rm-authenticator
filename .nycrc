@@ -1,0 +1,5 @@
+{
+  "reporter": ["text-summary", "text"],
+  "extension": [".ts"],
+  "exclude": ["**/test/**"]
+}

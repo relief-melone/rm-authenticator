@@ -1,4 +1,3 @@
-import mainConfig from "../config.main";
 import { Provider } from "../../interfaces/interface.provider";
 import { getAuthenticatorCallbackHost } from "../config.main";
 

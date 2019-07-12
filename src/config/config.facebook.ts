@@ -1,28 +1,29 @@
-import mainConfig from "./config.main";
+import { Provider } from "../interfaces/interface.provider";
+import { getCallbackURL, getCallbackPath } from "./functions/getCallback";
+import { getEnabled } from "./functions/getEnabled";
+import { getClientInfo } from "./functions/getClient";
+import {
+  getApplicationCallbackPath,
+  getApplicationCallbackURL
+} from "./functions/getApplicationCallback";
+import { getScope } from "./functions/getScope";
 
-export function facebookEnabled(env = process.env): boolean {
-  return env.FACEBOOK_ENABLED === "true";
-}
-
-export function getClientID(env = process.env): string {
-  if (!env.FACEBOOK_CLIENT_ID)
-    throw new Error("No ClientID for Facebook supplied");
-  return env.FACEBOOK_CLIENT_ID;
-}
-
-export function getClientSecret(env = process.env): string {
-  if (!env.FACEBOOK_CLIENT_SECRET)
-    throw new Error("No ClientSecret for Facebook supplied");
-  return env.FACEBOOK_CLIENT_SECRET;
-}
-
-export function getCallbackPath(env = process.env): string {
-  if (!env.FACEBOOK_CALLBACK_PATH) return "/callback";
-  if (env.FACEBOOK_CALLBACK_PATH.indexOf("/") !== 0)
-    return `/${env.FACEBOOK_CALLBACK_PATH}`;
-  return env.FACEBOOK_CALLBACK_PATH;
-}
-
-export function getCallbackURL(env = process.env): string {
-  return `${mainConfig.applicationCallbackHost}${getCallbackPath(env)}`;
-}
+export default (getEnabled(Provider.facebook)
+  ? {
+      clientId: getClientInfo(Provider.facebook, "id"),
+      clientSecret: getClientInfo(Provider.facebook, "secret"),
+      callbackPath: getCallbackPath(Provider.facebook),
+      callbackURL: getCallbackURL(Provider.facebook),
+      applicationCallbackPaths: {
+        success: getApplicationCallbackPath(Provider.facebook, "success"),
+        failure: getApplicationCallbackPath(Provider.facebook, "failure"),
+        logout: getApplicationCallbackPath(Provider.facebook, "logout")
+      },
+      applicationCallbackURLs: {
+        success: getApplicationCallbackURL(Provider.facebook, "success"),
+        failure: getApplicationCallbackURL(Provider.facebook, "failure"),
+        logout: getApplicationCallbackURL(Provider.facebook, "logout")
+      },
+      scope: getScope(Provider.facebook, ["email", "public_profile"])
+    }
+  : null);

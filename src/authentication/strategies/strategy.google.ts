@@ -27,7 +27,6 @@ export default (config = googleConfig) => {
             emails: profile.emails
           }
         };
-
         return done(null, user);
       }
     );
