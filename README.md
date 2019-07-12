@@ -41,7 +41,7 @@ The following section describes the Environment Variables to configure the Googl
 
 **GOOGLE_CALLBACK_PATH:** The path Google will redirect you to on this Authenticator. If your application does occupy this endpoint we suggest you leave it at it's default /callback so the redirect URL will be http://localhost:8081/auth/google/callback by default. As of this time /auth/google is fixed and cannot be changed, so if you set this to /my/callback/path the redirect will go to localhost:8081/auth/google/my/callback/path
 
-###Facebook
+### Facebook
 
 Facebook uses the same Environment Variables just with the provider name FACEBOOK instead of GOOGLE. So e.g. FACEBOOK_ENABLED, FACEBOOK_CLIENT_ID etc.
 
