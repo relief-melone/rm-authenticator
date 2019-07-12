@@ -6,14 +6,12 @@ handle the redirection and managing the Session. It's easy to configure with Env
 
 If you are using Node.js with Express as your packend, you might also want to look at https://github.com/relief-melone/rm-session-populator which is a middleware to easily populate your Request with a user Object containing all the user Information sent from this authenticator
 
-## Use
-
-### Configuration
+## Configuration
 
 As mentioned the Configuration is done by setting Environment Variables. You will also find the complete set in
 **.vscode/.env.template** which can be renamed to .env to be used when testing with VSCode.
 
-#### Main
+### Main
 
 In the Main section you set the Variables that apply to all providers (\* are required)
 
@@ -23,7 +21,7 @@ In the Main section you set the Variables that apply to all providers (\* are re
 
 **APPLICATION_LOGOUT_PATH\*:** This is the path the Authenticator will redirect you to when the user logs out. Defaults to /logout
 
-#### Google
+### Google
 
 The following section describes the Environment Variables to configure the Google. Required here only applies if you choose to enable Google.
 
@@ -37,9 +35,15 @@ The following section describes the Environment Variables to configure the Googl
 
 **GOOGLE_APPLICATION_FAILURE_CALLBACK_PATH:** The Path the Authenticator will redirect the user to if the login fails. By default it's "/failure"
 
-**GOOGLE_SCOPE:** The scope that will be used. By default the scopes profile, email and openid get requested
+**GOOGLE_APPLICATION_LOGOUT_CALLBACK_PATH:** The Path the Authenticator will redirect the user to if he logs out. By default it's "/logout"
 
-**GOOGLE_CALLBACK_PATH:** The path Google will redirect you to on this Authenticator. If your application does occupy this endpoint we suggest you leave it at it's default /callback so the redirect URL will be http://localhost:8081/auth/google/callback by default. As of this time /auth/google is fixed and cannot be changed
+**GOOGLE_SCOPE:** The scope that will be used. By default the scopes are "https://www.googleapis.com/auth/userinfo.profile" and "https://www.googleapis.com/auth/userinfo.email" get requested. Enter without space separated by ;
+
+**GOOGLE_CALLBACK_PATH:** The path Google will redirect you to on this Authenticator. If your application does occupy this endpoint we suggest you leave it at it's default /callback so the redirect URL will be http://localhost:8081/auth/google/callback by default. As of this time /auth/google is fixed and cannot be changed, so if you set this to /my/callback/path the redirect will go to localhost:8081/auth/google/my/callback/path
+
+###Facebook
+
+Facebook uses the same Environment Variables just with the provider name FACEBOOK instead of GOOGLE. So e.g. FACEBOOK_ENABLED, FACEBOOK_CLIENT_ID etc.
 
 ### Use directly
 
@@ -90,3 +94,15 @@ To logout simply create a Link to the logout endpoint.
 ```html
 <a href="http://localhost:8081/auth/logout"> Logout </a>
 ```
+
+###To Do
+
+As of now this Authenticator is still in Beta. Planned to be implemented in the near future is
+
+- Possibility to attach to a database for persistent storage of user information (so not just temporary sessions)
+- Implementation of more scopes for google and facebook (as of now, the default ones work. Others have not been properly tested)
+- Possibility to persist the Session data. (as of now if the container crashes, sessions are lost and users have to log in again)
+- Implementation of a basic username passwort login
+- Implementation of further Providers (Twitter, Instagram)
+
+While adding these features my goal is to still make every feature optional so there only is configuration to do when its a functionality you really want to use
