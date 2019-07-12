@@ -1,7 +1,7 @@
 import { Strategy as FacebookStrategy } from "passport-facebook";
 
 import facebookConfig from "../../config/config.facebook";
-import getProfilePicture from "./facebook.ts/getProfilePicture";
+import getProfilePicture from "./facebook/getProfilePicture";
 
 export default (config = facebookConfig) => {
   if ((config = facebookConfig)) {
