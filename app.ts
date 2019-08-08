@@ -8,8 +8,10 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./src/routes/auth";
 
 import mainConfig from "./src/config/config.main";
+import { initDatabase } from "./src/database/connectToMongoDbUsers";
 
 const app = express();
+initDatabase();
 
 // Set Response Headers
 app.use((req, res, next) => {
