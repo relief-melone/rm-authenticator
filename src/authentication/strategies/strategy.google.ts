@@ -1,33 +1,44 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 
 import googleConfig from "../../config/config.google";
+import User from "../../models/UserModel";
+import GoogleStrategyMongodb from "./strategy.google.mongodb";
+import GoogleStrategyDefault from "./strategy.google.default";
+import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
+import { Database } from "../../interfaces/interface.database";
 
-export default (config = googleConfig) => {
+export default (
+  config = googleConfig,
+  getEnabled = GetEnabled,
+  googleStrategyMongodb = GoogleStrategyMongodb,
+  googleStrategyDefault = GoogleStrategyDefault
+) => {
   if (config) {
     return new GoogleStrategy(
       {
         clientID: config.clientId,
         clientSecret: config.clientSecret,
-        callbackURL: config.callbackURL
+        callbackURL: config.callbackURL,
+        passReqToCallback: true
       },
-      (accessToken, refreshToken, profile, done) => {
-        const user = {
-          displayName: profile.displayName,
-          lastName: profile.family_name,
-          firstName: profile.given_name,
-          pictureURL: profile.picture,
-          preferredLanguage: profile.language,
-          email: profile.email,
-          google: {
-            id: profile.id,
+      async (req, accessToken, refreshToken, profile, done) => {
+        if (getEnabled(Database.mongodb)) {
+          return googleStrategyMongodb(
+            req,
             accessToken,
             refreshToken,
-            pictureURL: profile.picture,
-            language: profile.language,
-            emails: profile.emails
-          }
-        };
-        return done(null, user);
+            profile,
+            done
+          );
+        } else {
+          return googleStrategyDefault(
+            req,
+            accessToken,
+            refreshToken,
+            profile,
+            done
+          );
+        }
       }
     );
   } else {

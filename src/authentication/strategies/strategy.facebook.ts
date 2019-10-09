@@ -1,9 +1,17 @@
 import { Strategy as FacebookStrategy } from "passport-facebook";
 
 import facebookConfig from "../../config/config.facebook";
-import getProfilePicture from "./facebook.ts/getProfilePicture";
+import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
+import { Database } from "../../interfaces/interface.database";
+import FacebookStrategyMongodb from "./strategy.facebook.mongodb";
+import FacebookStrategyDefault from "./strategy.facebook.default";
 
-export default (config = facebookConfig) => {
+export default (
+  config = facebookConfig,
+  getEnabled = GetEnabled,
+  facebookStrategyMongodb = FacebookStrategyMongodb,
+  facebookStrategyDefault = FacebookStrategyDefault
+) => {
   if ((config = facebookConfig)) {
     return new FacebookStrategy(
       {
@@ -21,26 +29,27 @@ export default (config = facebookConfig) => {
           "middle_name",
           "gender",
           "link"
-        ]
+        ],
+        passReqToCallback: true
       },
-      (accessToken, refreshToken, profile, done) => {
-        const user = {
-          displayName: profile.displayName,
-          lastName: profile._json.last_name,
-          firstName: profile._json.first_name,
-          pictureURL: getProfilePicture(profile.id),
-          preferredLanguage: null,
-          email: profile._json.email,
-          facebook: {
-            id: profile.id,
+      async (req, accessToken, refreshToken, profile, done) => {
+        if (getEnabled(Database.mongodb)) {
+          return facebookStrategyMongodb(
+            req,
             accessToken,
             refreshToken,
-            pictureURL: getProfilePicture(profile.id),
-            emails: profile.emails,
-            friendsCount: profile._json.friends.summary
-          }
-        };
-        return done(null, user);
+            profile,
+            done
+          );
+        } else {
+          return facebookStrategyDefault(
+            req,
+            accessToken,
+            refreshToken,
+            profile,
+            done
+          );
+        }
       }
     );
   } else {
