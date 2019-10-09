@@ -5,6 +5,7 @@ const mongoose = new Mongoose();
 
 export const initDatabase = (config = mongoConfig()) => {
   if (!config) {
+    console.log("No MongoDB configured! Will not connect!");
     return;
   }
   console.log(`Attemping to connect to ${config.connectionString}`);

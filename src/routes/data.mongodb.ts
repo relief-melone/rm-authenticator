@@ -9,7 +9,7 @@ import UserClass from "../classes/User";
 const router = Router();
 
 router.get("/data/:Key", (req: Request, res: Response, next: NextFunction) => {
-  if (!mongodbConfig)
+  if (!mongodbConfig())
     return res
       .status(416)
       .send({ msg: "No Database enabled on Authenticator" });
@@ -20,6 +20,7 @@ router.get("/data/:Key", (req: Request, res: Response, next: NextFunction) => {
 
   const key = req.params.Key;
   const data = req.session.passport.user.data;
+  if (!data) return res.status(404).send();
   if (!data[key]) return res.status(404).send();
   return res
     .status(200)
@@ -30,7 +31,7 @@ router.get("/data/:Key", (req: Request, res: Response, next: NextFunction) => {
 router.post(
   "/data/:Key",
   async (req: Request, res: Response, next: NextFunction) => {
-    if (!mongodbConfig)
+    if (!mongodbConfig())
       return res
         .status(416)
         .send({ msg: "No Database enabled on Authenticator" });
@@ -39,8 +40,8 @@ router.post(
     if (!req.session.passport.user) return res.status(401).send();
     const key = req.params.Key;
 
-    const newData = {};
-    newData[key] = req.body;
+    const newData = { data: {} };
+    newData.data[key] = req.body;
 
     const sessionUser = req.session.passport.user;
     const userEmail = sessionUser.email;

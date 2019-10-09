@@ -45,6 +45,39 @@ The following section describes the Environment Variables to configure the Googl
 
 Facebook uses the same Environment Variables just with the provider name FACEBOOK instead of GOOGLE. So e.g. FACEBOOK_ENABLED, FACEBOOK_CLIENT_ID etc.
 
+### MongoDB
+
+If you want to attach a MongoDB to persist your user data just configure these Environment variables. If you use persistant storing of your User Data you will also have access to storing additional Data (Described further down)
+
+**MONGODB_ENABLED:** Decide if you want to enable MongoDB Connection. To do this set it to true
+**MONGODB_HOST:** Host of your MongoDB (e.g. something.mlab.com)
+**MONGODB_PORT:** Port of your Database. Defaults to 27017
+**MONGODB_DB:** Name of your database
+**MONGODB_USER:** Username for the connection (Only protected MongoDB connections are supported)
+**MONGODB_PASSWORD:** Password for that user
+
+### Data Endpoint
+
+If you enable persistent storage you will also be able to store and retrieve additional data you are using in your application. E.g. you can store Preferences for the user and so on. Basically all Object types of JSON Objects are supported. It will only work if the user is already signed in. To set data just use this (I'll be using axios for this example)
+
+```js
+axios.post(
+  "//authenticator-url:8081/auth/data/yourKey",
+  {
+    foo: "Bar"
+  },
+  { withCredentials: true }
+);
+```
+
+If you want to retrieve that data from the user later just use
+
+```js
+axios.get("//authenticator-url:8081/auth/data/yourKey", {
+  withCredentials: true
+});
+```
+
 ### Use directly
 
 If you don't want to start a Dockercontainer you can also start this locally. In the Repos root folder just do.
@@ -99,9 +132,7 @@ To logout simply create a Link to the logout endpoint.
 
 As of now this Authenticator is still in Beta. Planned to be implemented in the near future is
 
-- Possibility to attach to a database for persistent storage of user information (so not just temporary sessions)
 - Implementation of more scopes for google and facebook (as of now, the default ones work. Others have not been properly tested)
-- Possibility to persist the Session data. (as of now if the container crashes, sessions are lost and users have to log in again)
 - Implementation of a basic username passwort login
 - Implementation of further Providers (Twitter, Instagram)
 
