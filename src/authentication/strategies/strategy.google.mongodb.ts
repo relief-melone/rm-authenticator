@@ -1,6 +1,13 @@
 import User from "../../models/UserModel";
+import { Request } from "express";
 
-export default async (req, accessToken, refreshToken, profile, done) => {
+export default async (
+  req: Request,
+  accessToken: string,
+  refreshToken: string,
+  profile,
+  done
+) => {
   let user;
   const google = {
     id: profile.id,

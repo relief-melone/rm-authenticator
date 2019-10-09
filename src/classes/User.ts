@@ -12,4 +12,5 @@ export default interface User {
   email: string;
   google?: GoogleInfo;
   facebook?: FacebookInfo;
+  data?: any;
 }

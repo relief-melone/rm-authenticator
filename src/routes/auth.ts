@@ -4,6 +4,7 @@ import facebookConfig from "../config/config.facebook";
 import mainConfig from "../config/config.main";
 import configFacebook from "../config/config.facebook";
 import configGoogle from "../config/config.google";
+import data from "./data";
 
 const router = Router();
 
@@ -54,6 +55,8 @@ router.get("/userinfo", (req, res, next) => {
   if (!req.session.passport.user) return res.status(401).send();
   res.json(req.session.passport.user).end();
 });
+
+router.use(data);
 
 // Logout
 router.get("/logout", (req, res, next) => {

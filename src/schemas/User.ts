@@ -1,6 +1,7 @@
 import mongoose from "../database/connectToMongoDbUsers";
 import GoogleInfoSchema from "./GoogleInfo";
 import FacebookInfoSchema from "./FacebookInfo";
+import GoogleInfo from "../classes/GoogleInfo";
 
 const Schema = mongoose.Schema;
 
@@ -12,5 +13,6 @@ export default new Schema({
   preferredLanguage: { type: String },
   email: { type: String },
   google: { type: GoogleInfoSchema },
-  facebook: { type: FacebookInfoSchema }
+  facebook: { type: FacebookInfoSchema },
+  data: { type: mongoose.SchemaTypes.Mixed }
 });

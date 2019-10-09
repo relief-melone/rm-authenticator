@@ -6,6 +6,8 @@ import usePassort from "./src/authentication/passport";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./src/routes/auth";
+import okToOptions from "./src/services/okToOptions";
+import setOriginsHeader from "./src/services/setOriginsHeader";
 
 import mainConfig from "./src/config/config.main";
 import { initDatabase } from "./src/database/connectToMongoDbUsers";
@@ -13,18 +15,23 @@ import { initDatabase } from "./src/database/connectToMongoDbUsers";
 const app = express();
 initDatabase();
 
-// Set Response Headers
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", mainConfig.applicationCallbackHost);
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Auth, Authentication, Authorization, Credentials"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, UPDATE");
+// Send ok to OPTIONS preflight requests;
+app.use(setOriginsHeader);
+app.use(okToOptions);
+// Set Response HEaders
 
-  next();
-});
+// // Set Response Headers
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", mainConfig.applicationCallbackHost);
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Auth, Authentication, Authorization, Credentials"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, UPDATE");
+
+//   next();
+// });
 
 app.use(cookieParser());
 app.use(express.json());
