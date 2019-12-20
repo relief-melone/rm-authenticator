@@ -14,7 +14,7 @@ If you are using Node.js with Express as your packend, you might also want to lo
 ## CallbackUris
 If you register your callback URI for the Authenticator with your OAuth Provider use the following schema
 
-[youhost.com]/auth/[provider]/callback
+[your-hosted-authenticator.com]/auth/[provider]/callback
 
 where providers are all lowercase google, facebook, etc.
 
