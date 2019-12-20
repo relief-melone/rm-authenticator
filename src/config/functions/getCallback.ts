@@ -1,4 +1,4 @@
-import { Provider } from "../../interfaces/interface.provider";
+import { Provider } from "../../classes/interface.provider";
 import { getAuthenticatorCallbackHost } from "../config.main";
 
 export function getCallbackPath(provider: Provider, env = process.env): string {

@@ -1,4 +1,4 @@
-import { Provider } from "../interfaces/interface.provider";
+import { Provider } from "../classes/interface.provider";
 import { getCallbackURL, getCallbackPath } from "./functions/getCallback";
 import { getEnabled } from "./functions/getEnabled";
 import { getClientInfo } from "./functions/getClient";

@@ -1,4 +1,4 @@
-import { Mongoose, Connection } from "mongoose";
+import { Mongoose } from "mongoose";
 import mongoConfig from "../config/config.mongodb";
 
 const mongoose = new Mongoose();
@@ -12,7 +12,7 @@ export const initDatabase = (config = mongoConfig()) => {
   const connection = mongoose.connect(config.connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: true
+    useFindAndModify: false
   });
 
   mongoose.connection.on("open", () => {

@@ -18,20 +18,6 @@ initDatabase();
 // Send ok to OPTIONS preflight requests;
 app.use(setOriginsHeader);
 app.use(okToOptions);
-// Set Response HEaders
-
-// // Set Response Headers
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", mainConfig.applicationCallbackHost);
-//   res.header("Access-Control-Allow-Credentials", "true");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Auth, Authentication, Authorization, Credentials"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, UPDATE");
-
-//   next();
-// });
 
 app.use(cookieParser());
 app.use(express.json());

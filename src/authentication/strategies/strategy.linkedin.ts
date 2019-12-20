@@ -1,28 +1,30 @@
-import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as LinkedInStrategy } from "passport-linkedin-oauth2";
 
-import googleConfig from "../../config/config.google";
-import GoogleStrategyMongodb from "./strategy.google.mongodb";
-import GoogleStrategyDefault from "./strategy.google.default";
+import linkedInConfig from "../../config/config.linkedin";
+import LinkedInStrategyMongodb from "./strategy.linkedin.mongodb";
+import LinkedInStrategyDefault from "./strategy.linkedin.default";
 import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
 import { Database } from "../../classes/interface.database";
 
 export default (
-  config = googleConfig,
+  config = linkedInConfig,
   getEnabled = GetEnabled,
-  googleStrategyMongodb = GoogleStrategyMongodb,
-  googleStrategyDefault = GoogleStrategyDefault
+  linkedInStrategyMongodb = LinkedInStrategyMongodb,
+  linkedInStrategyDefault = LinkedInStrategyDefault
 ) => {
   if (config) {
-    return new GoogleStrategy(
+    return new LinkedInStrategy(
       {
         clientID: config.clientId,
         clientSecret: config.clientSecret,
         callbackURL: config.callbackURL,
-        passReqToCallback: true
+        scope: config.scope,
+        passReqToCallback: true,
+        state: true
       },
       async (req, accessToken, refreshToken, profile, done) => {
         if (getEnabled(Database.mongodb)) {
-          return googleStrategyMongodb(
+          return linkedInStrategyMongodb(
             req,
             accessToken,
             refreshToken,
@@ -30,7 +32,7 @@ export default (
             done
           );
         } else {
-          return googleStrategyDefault(
+          return linkedInStrategyDefault(
             req,
             accessToken,
             refreshToken,

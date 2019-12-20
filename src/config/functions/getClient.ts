@@ -1,4 +1,4 @@
-import { Provider } from "../../interfaces/interface.provider";
+import { Provider } from "../../classes/interface.provider";
 
 export function getClientInfo(
   provider: Provider,

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc mocha ./dist/test",
     "start": "node ./dist/app.js",
-    "build": "./node_modules/.bin/tsc --watch false"
+    "build": "./node_modules/.bin/tsc --watch false",
+    "tsc": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
+    "passport-linkedin-oauth2": "^2.0.0",
     "passport-oauth2": "^1.5.0",
     "pkg": "^4.4.0"
   }

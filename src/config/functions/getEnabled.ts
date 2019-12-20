@@ -1,5 +1,5 @@
-import { Provider } from "../../interfaces/interface.provider";
-import { Database } from "../../interfaces/interface.database";
+import { Provider } from "../../classes/interface.provider";
+import { Database } from "../../classes/interface.database";
 
 export function getEnabled(
   provider: Provider | Database,

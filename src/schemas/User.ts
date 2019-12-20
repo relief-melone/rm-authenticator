@@ -1,7 +1,7 @@
 import mongoose from "../database/connectToMongoDbUsers";
 import GoogleInfoSchema from "./GoogleInfo";
 import FacebookInfoSchema from "./FacebookInfo";
-import GoogleInfo from "../classes/GoogleInfo";
+import LinkedInInfoSchema from "./LinkedInInfo";
 
 const Schema = mongoose.Schema;
 
@@ -14,5 +14,6 @@ export default new Schema({
   email: { type: String },
   google: { type: GoogleInfoSchema },
   facebook: { type: FacebookInfoSchema },
+  linkedin: { type: LinkedInInfoSchema },
   data: { type: mongoose.SchemaTypes.Mixed }
 });

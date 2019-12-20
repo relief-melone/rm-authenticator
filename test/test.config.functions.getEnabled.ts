@@ -1,6 +1,6 @@
 import { getEnabled } from "../src/config/functions/getEnabled";
 import { expect } from "chai";
-import { Provider } from "../src/interfaces/interface.provider";
+import { Provider } from "../src/classes/interface.provider";
 
 describe("getEnabled", () => {
   it("will return false if no Environment Variable has been set", () => {
