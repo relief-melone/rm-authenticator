@@ -1,6 +1,6 @@
 {
   "name": "rm-authenticator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Authentication Application",
   "main": "./dist/app.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "google",
     "facebook"
   ],
-  "author": "FG-760",
+  "author": "Relief-Melone",
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.1.7",
