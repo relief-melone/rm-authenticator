@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { getClientInfo } from "../src/config/functions/getClient";
-import { Provider } from "../src/classes/interface.provider";
+import { Provider } from "../src/classes/Provider";
 
 describe("getClientInfo", () => {
   it("will throw an error if no ClientID has been provided", () => {

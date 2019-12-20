@@ -1,5 +1,5 @@
 import { getScope } from "../src/config/functions/getScope";
-import { Provider } from "../src/classes/interface.provider";
+import { Provider } from "../src/classes/Provider";
 import { expect } from "chai";
 
 describe("getScope", () => {

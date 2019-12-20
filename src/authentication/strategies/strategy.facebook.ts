@@ -2,7 +2,7 @@ import { Strategy as FacebookStrategy } from "passport-facebook";
 
 import facebookConfig from "../../config/config.facebook";
 import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
-import { Database } from "../../classes/interface.database";
+import { Database } from "../../classes/Database";
 import FacebookStrategyMongodb from "./strategy.facebook.mongodb";
 import FacebookStrategyDefault from "./strategy.facebook.default";
 

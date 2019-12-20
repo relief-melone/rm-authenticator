@@ -1,4 +1,4 @@
-import { Provider } from "../../classes/interface.provider";
+import { Provider } from "../../classes/Provider";
 import { getApplicationCallbackHost } from "../config.main";
 
 const defaultPaths = {

@@ -4,7 +4,7 @@ import googleConfig from "../../config/config.google";
 import GoogleStrategyMongodb from "./strategy.google.mongodb";
 import GoogleStrategyDefault from "./strategy.google.default";
 import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
-import { Database } from "../../classes/interface.database";
+import { Database } from "../../classes/Database";
 
 export default (
   config = googleConfig,

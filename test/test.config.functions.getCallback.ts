@@ -3,7 +3,7 @@ import {
   getCallbackPath,
   getCallbackURL
 } from "../src/config/functions/getCallback";
-import { Provider } from "../src/classes/interface.provider";
+import { Provider } from "../src/classes/Provider";
 
 describe("getCallbackPath", () => {
   it("will return the correct default path when no env vars have been set", () => {

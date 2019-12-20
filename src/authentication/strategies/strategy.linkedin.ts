@@ -4,7 +4,7 @@ import linkedInConfig from "../../config/config.linkedin";
 import LinkedInStrategyMongodb from "./strategy.linkedin.mongodb";
 import LinkedInStrategyDefault from "./strategy.linkedin.default";
 import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
-import { Database } from "../../classes/interface.database";
+import { Database } from "../../classes/Database";
 
 export default (
   config = linkedInConfig,

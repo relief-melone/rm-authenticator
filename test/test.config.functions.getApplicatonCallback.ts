@@ -3,7 +3,7 @@ import {
   getApplicationCallbackPath,
   getApplicationCallbackURL
 } from "../src/config/functions/getApplicationCallback";
-import { Provider } from "../src/classes/interface.provider";
+import { Provider } from "../src/classes/Provider";
 
 describe("getApplicationCallbackPath", () => {
   it("will return the default paths if no env var has been set", () => {
