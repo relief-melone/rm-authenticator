@@ -1,5 +1,6 @@
 import User from "../../models/UserModel";
 import { Request } from "express";
+import GoogleInfo from "../../classes/GoogleInfo";
 
 export default async (
   req: Request,
@@ -9,11 +10,11 @@ export default async (
   done
 ) => {
   let user;
-  const google = {
+  const google:GoogleInfo = {
     id: profile.id,
     pictureURL: profile.picture,
     language: profile.language,
-    emails: profile.emails
+    emails: profile.emails.map(mail => mail.value)
   };
 
   const sessionUser = req.user
