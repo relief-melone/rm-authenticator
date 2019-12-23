@@ -1,5 +1,5 @@
-import { Request } from "express";
-import { VerifyCallback } from "passport-google-oauth2";
+import { Request } from 'express';
+import { VerifyCallback } from 'passport-google-oauth2';
 
 export default async (
   req: Request,
@@ -7,7 +7,7 @@ export default async (
   refreshToken: string,
   profile: any,
   done: VerifyCallback
-) => {
+): Promise<void> => {
   const google = {
     id: profile.id,
     pictureURL: profile.picture,
@@ -25,13 +25,5 @@ export default async (
     google
   };
 
-  return done(
-    null,
-    Object.assign(user, {
-      google: Object.assign({}, user.google, {
-        accessToken,
-        refreshToken
-      })
-    })
-  );
+  return done(null, user);
 };

@@ -1,38 +1,38 @@
 interface _jsonName {
-  localized: Record<string,string>,
+  localized: Record<string,string>;
   preferredLocale: {
-    country: string,
-    language: string
-  }
+    country: string;
+    language: string;
+  };
 }
 
 interface LinkedInImage {
-  value: string
+  value: string;
 }
 
 interface LinkedInEmail {
-  value: string
+  value: string;
 }
 export default interface LinkedInProfile {
   _json: {
-    id: string,
-    firstName: _jsonName,
-    lastname: _jsonName,
+    id: string;
+    firstName: _jsonName;
+    lastname: _jsonName;
     profilePicture: {
-      displayImage: string,
-      "displayImage~": any
-    },
-  },
-  _emailJSON: any,
-  _raw: string,
-  _emailRaw: string
-  displayName: string,
-  id:string,
+      displayImage: string;
+      'displayImage~': any;
+    };
+  };
+  _emailJSON: any;
+  _raw: string;
+  _emailRaw: string;
+  displayName: string;
+  id: string;
   name: {
-    familyName: string,
-    givenName: string
-  },
-  photos: LinkedInImage[],
-  provider: "linkedin",
-  emails: LinkedInEmail[],
+    familyName: string;
+    givenName: string;
+  };
+  photos: LinkedInImage[];
+  provider: 'linkedin';
+  emails: LinkedInEmail[];
 }

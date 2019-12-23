@@ -1,17 +1,17 @@
-import { Strategy as LinkedInStrategy } from "passport-linkedin-oauth2";
+import { Strategy as LinkedInStrategy } from 'passport-linkedin-oauth2';
 
-import linkedInConfig from "../../config/config.linkedin";
-import LinkedInStrategyMongodb from "./strategy.linkedin.mongodb";
-import LinkedInStrategyDefault from "./strategy.linkedin.default";
-import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
-import { Database } from "../../classes/Database";
+import linkedInConfig from '../../config/config.linkedin';
+import LinkedInStrategyMongodb from './strategy.linkedin.mongodb';
+import LinkedInStrategyDefault from './strategy.linkedin.default';
+import { getEnabled as GetEnabled } from '../../config/functions/getEnabled';
+import { Database } from '../../classes/Database';
 
 export default (
   config = linkedInConfig,
   getEnabled = GetEnabled,
   linkedInStrategyMongodb = LinkedInStrategyMongodb,
   linkedInStrategyDefault = LinkedInStrategyDefault
-) => {
+): any => {
   if (config) {
     return new LinkedInStrategy(
       {
@@ -43,6 +43,6 @@ export default (
       }
     );
   } else {
-    throw new Error("No Confg Supplied");
+    throw new Error('No Confg Supplied');
   }
 };

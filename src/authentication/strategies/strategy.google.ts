@@ -1,17 +1,17 @@
-import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 
-import googleConfig from "../../config/config.google";
-import GoogleStrategyMongodb from "./strategy.google.mongodb";
-import GoogleStrategyDefault from "./strategy.google.default";
-import { getEnabled as GetEnabled } from "../../config/functions/getEnabled";
-import { Database } from "../../classes/Database";
+import googleConfig from '../../config/config.google';
+import GoogleStrategyMongodb from './strategy.google.mongodb';
+import GoogleStrategyDefault from './strategy.google.default';
+import { getEnabled as GetEnabled } from '../../config/functions/getEnabled';
+import { Database } from '../../classes/Database';
 
 export default (
   config = googleConfig,
   getEnabled = GetEnabled,
   googleStrategyMongodb = GoogleStrategyMongodb,
   googleStrategyDefault = GoogleStrategyDefault
-) => {
+): any => {
   if (config) {
     return new GoogleStrategy(
       {
@@ -41,6 +41,6 @@ export default (
       }
     );
   } else {
-    throw new Error("No Confg Supplied");
+    throw new Error('No Confg Supplied');
   }
 };
