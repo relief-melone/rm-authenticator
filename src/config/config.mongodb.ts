@@ -1,5 +1,5 @@
 import { getEnabled } from "./functions/getEnabled";
-import { Database } from "../interfaces/interface.database";
+import { Database } from "../classes/Database";
 
 export default (getEnabled(Database.mongodb)
   ? (env = process.env) => {

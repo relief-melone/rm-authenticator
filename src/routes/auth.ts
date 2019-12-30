@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import passport from "passport";
-import facebookConfig from "../config/config.facebook";
 import mainConfig from "../config/config.main";
 import configFacebook from "../config/config.facebook";
 import configGoogle from "../config/config.google";
+import configLinkedIn from "../config/config.linkedin";
 import data from "./data.mongodb";
 import configMongodb from "../config/config.mongodb";
 
@@ -32,19 +32,37 @@ if (configGoogle) {
 }
 
 // Facebook
-if (facebookConfig) {
+if (configFacebook) {
   router.get(
     "/facebook",
     passport.authenticate("facebook", {
-      scope: facebookConfig.scope
+      scope: configFacebook.scope
     })
   );
 
   router.get(
-    `/facebook${facebookConfig.callbackPath}`,
+    `/facebook${configFacebook.callbackPath}`,
     passport.authenticate("facebook", {
       successRedirect: (configFacebook as any).applicationCallbackURLs.success,
       failureRedirect: (configFacebook as any).applicationCallbackURLs.failure
+    })
+  );
+}
+
+// LinkedIn
+if (configLinkedIn) {
+  router.get(
+    "/linkedin",
+    passport.authenticate("linkedin", {
+      scope: configLinkedIn.scope
+    })
+  );
+
+  router.get(
+    `/linkedin${configLinkedIn.callbackPath}`,
+    passport.authenticate("linkedin", {
+      successRedirect: (configLinkedIn as any).applicationCallbackURLs.success,
+      failureRedirect: (configLinkedIn as any).applicationCallbackURLs.failure
     })
   );
 }

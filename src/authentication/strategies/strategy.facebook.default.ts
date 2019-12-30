@@ -1,7 +1,7 @@
-import getProfilePicture from "./facebook/getProfilePicture";
-import getFriendsCount from "./facebook/getFriendsCount";
+import getProfilePicture from './facebook/getProfilePicture';
+import getFriendsCount from './facebook/getFriendsCount';
 
-export default async (req, accessToken, refreshToken, profile, done) => {
+export default async (req, accessToken, refreshToken, profile, done): Promise<void> => {
   const facebook = {
     id: profile.id,
     pictureURL: getProfilePicture(profile.id),
@@ -22,11 +22,6 @@ export default async (req, accessToken, refreshToken, profile, done) => {
 
   return done(
     null,
-    Object.assign(user, {
-      facebook: Object.assign({}, user.facebook, {
-        accessToken,
-        refreshToken
-      })
-    })
+    user
   );
 };

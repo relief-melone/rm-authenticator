@@ -6,6 +6,18 @@ handle the redirection and managing the Session. It's easy to configure with Env
 
 If you are using Node.js with Express as your packend, you might also want to look at https://github.com/relief-melone/rm-session-populator which is a middleware to easily populate your Request with a user Object containing all the user Information sent from this authenticator
 
+## Currently supported Providers
+- Google
+- Facebook
+- LinkedIn
+
+## CallbackUris
+If you register your callback URI for the Authenticator with your OAuth Provider use the following schema
+
+[your-hosted-authenticator.com]/auth/[provider]/callback
+
+where providers are all lowercase google, facebook, etc.
+
 ## Configuration
 
 As mentioned the Configuration is done by setting Environment Variables. You will also find the complete set in
@@ -44,6 +56,9 @@ The following section describes the Environment Variables to configure the Googl
 ### Facebook
 
 Facebook uses the same Environment Variables just with the provider name FACEBOOK instead of GOOGLE. So e.g. FACEBOOK_ENABLED, FACEBOOK_CLIENT_ID etc.
+
+### LinkedIn
+See Settings for Google and Facebook
 
 ### MongoDB
 
