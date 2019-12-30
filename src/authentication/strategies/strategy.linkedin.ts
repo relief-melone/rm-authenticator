@@ -23,23 +23,8 @@ export default (
         state: true
       },
       async (req, accessToken, refreshToken, profile, done) => {
-        if (getEnabled(Database.mongodb)) {
-          return linkedInStrategyMongodb(
-            req,
-            accessToken,
-            refreshToken,
-            profile,
-            done
-          );
-        } else {
-          return linkedInStrategyDefault(
-            req,
-            accessToken,
-            refreshToken,
-            profile,
-            done
-          );
-        }
+        const strategy = getEnabled(Database.mongodb) ? linkedInStrategyMongodb : linkedInStrategyDefault;
+        return strategy(req, accessToken, refreshToken, profile, done);
       }
     );
   } else {
