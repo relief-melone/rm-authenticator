@@ -7,5 +7,5 @@ const parseEnvInt = (EnvVar: string): number | null => {
 };
 
 export default {
-  httpPort: parseEnvInt("HTTP_PORT") || 8081
+  httpPort: parseEnvInt('HTTP_PORT') || 8081
 };
