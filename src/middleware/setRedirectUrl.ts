@@ -1,5 +1,6 @@
 import { Response, NextFunction, Request } from 'express';
-import getRedirectObject from '@/services/getRedirectObject';
+import getProviderRedirectObject from '@/services/getProviderRedirectObject';
+import getLogoutRedirectObject from '@/services/getLogoutRedirectObject';
 
 export default (
   req: Request, 
@@ -7,14 +8,30 @@ export default (
   next: NextFunction, 
 ): void => {
   if(req.session){
-    if(req.path === '/auth/webeam'){
-      try {
-        req.session.redirect = getRedirectObject(req.query.successRedirect, req.query.failureRedirect);
-      } catch (err) {
-        res.status(403).send(err);
-        return;
-      }
-    }    
+    const splitPath= req.path.split('/').filter(a => a);
+    if(
+      splitPath.length === 2 && 
+      ( 
+        splitPath[1] === 'google' || 
+        splitPath[1] === 'facebook' ||
+        splitPath[1] === 'linkedin'
+      )
+    ){
+      req.session.redirect = getProviderRedirectObject(
+        splitPath[1], 
+        req.query.successRedirect, 
+        req.query.failureRedirect,
+        req.query.logoutRedirect
+      );
+    }
+    if(
+      splitPath.length === 2 && 
+      splitPath[1] === 'logout'      
+    ){
+      req.session.redirect = getLogoutRedirectObject(             
+        req.query.logoutRedirect
+      );
+    }
   }
   next();
 };

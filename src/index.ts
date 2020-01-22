@@ -8,11 +8,10 @@ import cookieParser from 'cookie-parser';
 
 import authRoutes from '@/routes/auth';
 
-
-
 import { initDatabase } from '@/database/connectToMongoDbUsers';
 import setCorsHeaders from './middleware/setCorsHeaders';
 import acceptOptions from './middleware/acceptOptions';
+import setRedirectUrl from './middleware/setRedirectUrl';
 
 export default (): void => {
   const app = express();
@@ -31,6 +30,7 @@ export default (): void => {
   );
 
   usePassort(app);
+  app.use(setRedirectUrl);
 
   app.use('/auth', authRoutes);
 

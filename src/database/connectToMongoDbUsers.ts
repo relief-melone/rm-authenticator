@@ -12,7 +12,8 @@ export const initDatabase = (config = mongoConfig()): Promise<Mongoose>|void => 
   const connection = mongoose.connect(config.connectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
   });
 
   mongoose.connection.on('open', () => {

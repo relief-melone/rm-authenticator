@@ -8,7 +8,7 @@ import { Provider } from '../src/classes/Provider';
 describe('getCallbackPath', () => {
   it('will return the correct default path when no env vars have been set', () => {
     const env = {};
-    expect(getCallbackPath(Provider.google, env)).to.equal('/callback');
+    expect(getCallbackPath('google', env)).to.equal('/callback');
   });
 
   it('will add an / at the beginning if forgotten by the user', () => {
@@ -16,21 +16,21 @@ describe('getCallbackPath', () => {
       GOOGLE_CALLBACK_PATH: 'my-path'
     };
 
-    expect(getCallbackPath(Provider.google, env)).to.equal('/my-path');
+    expect(getCallbackPath('google', env)).to.equal('/my-path');
   });
 
   it('will leave the path as is when entered correctly', () => {
     const env = {
       GOOGLE_CALLBACK_PATH: '/my/path'
     };
-    expect(getCallbackPath(Provider.google, env)).to.equal('/my/path');
+    expect(getCallbackPath('google', env)).to.equal('/my/path');
   });
 });
 
 describe('getCallbackURL', () => {
   it('will return the default URL if no env vars have been set', () => {
     const env = {};
-    expect(getCallbackURL(Provider.google, env)).to.equal(
+    expect(getCallbackURL('google', env)).to.equal(
       'http://localhost:8081/auth/google/callback'
     );
   });
@@ -39,7 +39,7 @@ describe('getCallbackURL', () => {
     const env = {
       GOOGLE_CALLBACK_PATH: '/my/callback/path'
     };
-    expect(getCallbackURL(Provider.google, env)).to.equal(
+    expect(getCallbackURL('google', env)).to.equal(
       'http://localhost:8081/auth/google/my/callback/path'
     );
   });
@@ -48,7 +48,7 @@ describe('getCallbackURL', () => {
     const env = {
       AUTHENTICATOR_CALLBACK_HOST: 'https://my-authenticator.com'
     };
-    expect(getCallbackURL(Provider.google, env)).to.equal(
+    expect(getCallbackURL('google', env)).to.equal(
       'https://my-authenticator.com/auth/google/callback'
     );
   });
@@ -58,7 +58,7 @@ describe('getCallbackURL', () => {
       AUTHENTICATOR_CALLBACK_HOST: 'https://my-authenticator.com',
       GOOGLE_CALLBACK_PATH: '/my/callback/path'
     };
-    expect(getCallbackURL(Provider.google, env)).to.equal(
+    expect(getCallbackURL('google', env)).to.equal(
       'https://my-authenticator.com/auth/google/my/callback/path'
     );
   });

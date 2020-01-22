@@ -7,23 +7,24 @@ import {
   getApplicationCallbackURL
 } from './functions/getApplicationCallback';
 import { getScope } from './functions/getScope';
+import ConfigProvider from '@/classes/Config';
 
-export default (getEnabled(Provider.facebook)
+const config: (ConfigProvider|null) =(getEnabled('facebook')
   ? {
-    clientId: getClientInfo(Provider.facebook, 'id'),
-    clientSecret: getClientInfo(Provider.facebook, 'secret'),
-    callbackPath: getCallbackPath(Provider.facebook),
-    callbackURL: getCallbackURL(Provider.facebook),
+    clientId: getClientInfo('facebook', 'id'),
+    clientSecret: getClientInfo('facebook', 'secret'),
+    callbackPath: getCallbackPath('facebook'),
+    callbackURL: getCallbackURL('facebook'),
     applicationCallbackPaths: {
-      success: getApplicationCallbackPath(Provider.facebook, 'success'),
-      failure: getApplicationCallbackPath(Provider.facebook, 'failure'),
-      logout: getApplicationCallbackPath(Provider.facebook, 'logout')
+      success: getApplicationCallbackPath('facebook', 'success'),
+      failure: getApplicationCallbackPath('facebook', 'failure'),      
     },
     applicationCallbackURLs: {
-      success: getApplicationCallbackURL(Provider.facebook, 'success'),
-      failure: getApplicationCallbackURL(Provider.facebook, 'failure'),
-      logout: getApplicationCallbackURL(Provider.facebook, 'logout')
+      success: getApplicationCallbackURL('facebook', 'success'),
+      failure: getApplicationCallbackURL('facebook', 'failure'),      
     },
-    scope: getScope(Provider.facebook, ['email', 'public_profile'])
-  }
+    scope: getScope('facebook', ['email', 'public_profile'])
+  } 
   : null);
+
+export default config;
