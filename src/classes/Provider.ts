@@ -1,5 +1,3 @@
-export enum Provider {
-  google = "google",
-  facebook = "facebook",
-  linkedin = "linkedin",
-}
+export type Provider = 'google' | 'facebook' | 'linkedin';
+
+export type ProviderAndLogout = Provider | 'logout';

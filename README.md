@@ -31,6 +31,8 @@ In the Main section you set the Variables that apply to all providers (\* are re
 
 **APPLICATION_CALLBACK_HOST\*:** Where your front-end resides. This will be the host the authenticator will redirect you to. It is also set automatically in the Repose Access-Control-Allowed-Origin header. Defaults to http://localhost:8080 so it's required if you want to use it for more than testing.
 
+**ALLOWED_REDIRECT_HOSTS\*:** Hosts you may redirect to. So let's assume you want to be able to redirect to your localhost for testing as well as to my-site.com. That would mean the Var would look like *localhost,my-site.com*. Remember that you also need to include the host of your default application callback host in var. See the chapters Usage from Frontend to see how to use the custom redirecting.
+
 **APPLICATION_LOGOUT_PATH\*:** This is the path the Authenticator will redirect you to when the user logs out. Defaults to /logout
 
 ### Google
@@ -127,7 +129,15 @@ After the Authenticator has been Started you can use it from your frontend. E.g.
 <a href="http://localhost:8081/auth/google">Login</a>
 ```
 
-The Authenticator will handle everything from here on and at the end redirect you to your Website. Here you will find the connect.sid Cookie. Now to get the UserInfo behind that session just make a call to the API (i will use axios in this example)
+The Authenticator will handle everything from here on and at the end redirect you to your Website. In this case the one you specified for your APPLICATION_CALLBACK_HOST. You can also override your redirect URLs so let's assume you want to return to my-site.com for success or my-site.com/error in case of an error. This would mean your login link would look like
+
+```html
+<a href="http://localhost:8081/auth/google?successRedirect=mysite.com&failureRedirect=my-site.com/error">Login</a>
+```
+
+After you got redirected you will find the connect.sid Cookie (if you did not rename it with the env var). Now to get the UserInfo behind that session just make a call to the API (i will use axios in this example).
+
+Remember that the host you want to redirect to has to be added in the ALLOWED_REDIRECT_HOSTS Environment Variable
 
 ```js
 axios
@@ -143,12 +153,18 @@ To logout simply create a Link to the logout endpoint.
 <a href="http://localhost:8081/auth/logout"> Logout </a>
 ```
 
+As with login you can also change the redirection after logout like this
+```html
+<a href="http://localhost:8081/auth/logout?logoutRedirect=http://my-site.com/logout"> Logout </a>
+```
+
+Like before you will need to include that host in the ALLOWED_REDIRECT_HOSTS Environment Variable
+
 ### To Do
 
 As of now this Authenticator is still in Beta. Planned to be implemented in the near future is
 
 - Implementation of more scopes for google and facebook (as of now, the default ones work. Others have not been properly tested)
-- Implementation of a basic username passwort login
 - Implementation of further Providers (Twitter, Instagram)
 
 While adding these features my goal is to still make every feature optional so there only is configuration to do when its a functionality you really want to use

@@ -1,12 +1,12 @@
-import { Provider } from "../../classes/Provider";
-import { getAuthenticatorCallbackHost } from "../config.main";
+import { Provider } from '../../classes/Provider';
+import { getAuthenticatorCallbackHost } from '../config.main';
 
 export function getCallbackPath(provider: Provider, env = process.env): string {
   const providerInEnv: string = provider.toUpperCase();
-  const pathVariable: string = `${providerInEnv}_CALLBACK_PATH`;
+  const pathVariable = `${providerInEnv}_CALLBACK_PATH`;
 
-  if (!env[pathVariable]) return "/callback";
-  if ((env[pathVariable] as string).indexOf("/") !== 0)
+  if (!env[pathVariable]) return '/callback';
+  if ((env[pathVariable] as string).indexOf('/') !== 0)
     return `/${env[pathVariable]}`;
   return env[pathVariable] as string;
 }

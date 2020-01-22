@@ -1,33 +1,33 @@
-import { Provider } from "../classes/Provider";
-import { getCallbackURL, getCallbackPath } from "./functions/getCallback";
-import { getEnabled } from "./functions/getEnabled";
-import { getClientInfo } from "./functions/getClient";
+import { getCallbackURL, getCallbackPath } from './functions/getCallback';
+import { getEnabled } from './functions/getEnabled';
+import { getClientInfo } from './functions/getClient';
 import {
   getApplicationCallbackPath,
   getApplicationCallbackURL
-} from "./functions/getApplicationCallback";
-import { getScope } from "./functions/getScope";
+} from './functions/getApplicationCallback';
+import { getScope } from './functions/getScope';
+import ConfigProvider from '@/classes/Config';
 
-export default (getEnabled(Provider.linkedin)
+const config: (ConfigProvider | null) = (getEnabled('linkedin')
   ? {
-      clientId: getClientInfo(Provider.linkedin, "id"),
-      clientSecret: getClientInfo(Provider.linkedin, "secret"),
-      callbackPath: getCallbackPath(Provider.linkedin),
-      callbackURL: getCallbackURL(Provider.linkedin),
-      applicationCallbackPaths: {
-        success: getApplicationCallbackPath(Provider.linkedin, "success"),
-        failure: getApplicationCallbackPath(Provider.linkedin, "failure"),
-        logout: getApplicationCallbackPath(Provider.linkedin, "logout")
-      },
-      applicationCallbackURLs: {
-        success: getApplicationCallbackURL(Provider.linkedin, "success"),
-        failure: getApplicationCallbackURL(Provider.linkedin, "failure"),
-        logout: getApplicationCallbackURL(Provider.linkedin, "logout")
-      },
-      scope: getScope(Provider.linkedin, [
-        'r_liteprofile', 
-        'r_emailaddress',
-        'w_member_social'
-      ])
-    }
+    clientId: getClientInfo('linkedin', 'id'),
+    clientSecret: getClientInfo('linkedin', 'secret'),
+    callbackPath: getCallbackPath('linkedin'),
+    callbackURL: getCallbackURL('linkedin'),
+    applicationCallbackPaths: {
+      success: getApplicationCallbackPath('linkedin', 'success'),
+      failure: getApplicationCallbackPath('linkedin', 'failure')      
+    },
+    applicationCallbackURLs: {
+      success: getApplicationCallbackURL('linkedin', 'success'),
+      failure: getApplicationCallbackURL('linkedin', 'failure'),      
+    },
+    scope: getScope('linkedin', [
+      'r_liteprofile', 
+      'r_emailaddress',
+      'w_member_social'
+    ])
+  }
   : null);
+
+export default config;

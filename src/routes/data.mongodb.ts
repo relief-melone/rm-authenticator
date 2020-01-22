@@ -17,7 +17,7 @@ router.get('/data/:Key', async (req: Request, res: Response) => {
   if (!req.session.passport.user) return res.status(401).send();
 
   const key = req.params.Key;
-  const data = await getDataForUser(req.user._id);
+  const data = await getDataForUser(req.session.passport.user._id);
   if (!data) return res.status(404).send();
   if (!data[key]) return res.status(404).send();
   return res

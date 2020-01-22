@@ -1,4 +1,4 @@
-import { Provider } from "../../classes/Provider";
+import { Provider } from '../../classes/Provider';
 
 export function getScope(
   provider: Provider,
@@ -7,5 +7,5 @@ export function getScope(
 ): string[] {
   const envVar = `${provider.toUpperCase()}_SCOPE`;
   if (!env[envVar]) return defaultScopes;
-  return (env[envVar] as string).split(";");
+  return (env[envVar] as string).split(';');
 }

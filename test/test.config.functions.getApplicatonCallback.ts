@@ -3,17 +3,16 @@ import {
   getApplicationCallbackPath,
   getApplicationCallbackURL
 } from '../src/config/functions/getApplicationCallback';
-import { Provider } from '../src/classes/Provider';
 
 describe('getApplicationCallbackPath', () => {
   it('will return the default paths if no env var has been set', () => {
-    expect(getApplicationCallbackPath(Provider.google, 'success', {})).to.equal(
+    expect(getApplicationCallbackPath('google', 'success', {})).to.equal(
       ''
     );
-    expect(getApplicationCallbackPath(Provider.google, 'failure', {})).to.equal(
+    expect(getApplicationCallbackPath('google', 'failure', {})).to.equal(
       '/failure'
     );
-    expect(getApplicationCallbackPath(Provider.google, 'logout', {})).to.equal(
+    expect(getApplicationCallbackPath('google', 'logout', {})).to.equal(
       '/logout'
     );
   });
@@ -25,12 +24,12 @@ describe('getApplicationCallbackPath', () => {
       GOOGLE_APPLICATION_LOGOUT_CALLBACK_PATH: 'my/logout/path'
     };
     expect(
-      getApplicationCallbackPath(Provider.google, 'success', env)
+      getApplicationCallbackPath('google', 'success', env)
     ).to.equal('/my-path');
     expect(
-      getApplicationCallbackPath(Provider.google, 'failure', env)
+      getApplicationCallbackPath('google', 'failure', env)
     ).to.equal('/my-failure/path');
-    expect(getApplicationCallbackPath(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackPath('google', 'logout', env)).to.equal(
       '/my/logout/path'
     );
   });
@@ -42,14 +41,14 @@ describe('getApplicationCallbackPath', () => {
       GOOGLE_APPLICATION_LOGOUT_CALLBACK_PATH: '/my/logout/path'
     };
     expect(
-      getApplicationCallbackPath(Provider.google, 'success', env)
+      getApplicationCallbackPath('google', 'success', env)
     ).to.equal('/my-path');
 
     expect(
-      getApplicationCallbackPath(Provider.google, 'failure', env)
+      getApplicationCallbackPath('google', 'failure', env)
     ).to.equal('/my-failure/path');
 
-    expect(getApplicationCallbackPath(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackPath('google', 'logout', env)).to.equal(
       '/my/logout/path'
     );
   });
@@ -58,13 +57,13 @@ describe('getApplicationCallbackPath', () => {
 describe('getApplicationCallbackURL', () => {
   it('ill return the correct default URL if no environmemnt variables have been set by the user', () => {
     const env = {};
-    expect(getApplicationCallbackURL(Provider.google, 'success', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'success', env)).to.equal(
       'http://localhost:8080'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'failure', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'failure', env)).to.equal(
       'http://localhost:8080/failure'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'logout', env)).to.equal(
       'http://localhost:8080/logout'
     );
   });
@@ -77,13 +76,13 @@ describe('getApplicationCallbackURL', () => {
       APPLICATION_CALLBACK_HOST: 'https://my-new-website.com'
     };
 
-    expect(getApplicationCallbackURL(Provider.google, 'success', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'success', env)).to.equal(
       'https://my-new-website.com/my-path'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'failure', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'failure', env)).to.equal(
       'https://my-new-website.com/my-failure/path'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'logout', env)).to.equal(
       'https://my-new-website.com/my/logout/path'
     );
   });
@@ -95,13 +94,13 @@ describe('getApplicationCallbackURL', () => {
       GOOGLE_APPLICATION_LOGOUT_CALLBACK_PATH: '/my/logout/path'
     };
 
-    expect(getApplicationCallbackURL(Provider.google, 'success', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'success', env)).to.equal(
       'http://localhost:8080/my-path'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'failure', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'failure', env)).to.equal(
       'http://localhost:8080/my-failure/path'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'logout', env)).to.equal(
       'http://localhost:8080/my/logout/path'
     );
   });
@@ -111,13 +110,13 @@ describe('getApplicationCallbackURL', () => {
       APPLICATION_CALLBACK_HOST: 'https://my-new-website.com'
     };
 
-    expect(getApplicationCallbackURL(Provider.google, 'success', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'success', env)).to.equal(
       'https://my-new-website.com'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'failure', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'failure', env)).to.equal(
       'https://my-new-website.com/failure'
     );
-    expect(getApplicationCallbackURL(Provider.google, 'logout', env)).to.equal(
+    expect(getApplicationCallbackURL('google', 'logout', env)).to.equal(
       'https://my-new-website.com/logout'
     );
   });

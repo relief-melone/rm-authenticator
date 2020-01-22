@@ -19,7 +19,7 @@ export default async (
   };
 
   const sessionUser = req.user
-    ? new User(Object.assign({}, req.user, { google }))
+    ? new User(Object.assign({}, req.user as any, { google }))
     : new User({
       displayName: profile.displayName,
       lastName: profile.family_name,

@@ -15,7 +15,7 @@ export default async (
   const linkedin = new LinkedInInfo(profile);
 
   const sessionUser = req.user
-    ? new User(Object.assign({}, req.user, { linkedin }))
+    ? new User(Object.assign({}, req.user as any, { linkedin }))
     : new User({
       displayName: linkedin.displayName,
       lastName: linkedin.lastName,
