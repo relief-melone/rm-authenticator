@@ -3,4 +3,5 @@ export default interface MainConfig {
   authenticatorCallbackHost: string;
   applicationLogoutURL: string;
   allowedRedirectHosts: string[];
+  devMode: boolean;
 }

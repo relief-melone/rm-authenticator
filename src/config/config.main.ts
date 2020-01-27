@@ -24,7 +24,7 @@ export function getApplicationLogourURL(env = process.env): string {
 }
 
 export const getAllowedRedirectHosts = (env = process.env): string[] => {
-  return (process.env.ALLOWED_REDIRECT_HOSTS || 'localhost')
+  return (process.env.ALLOWED_REDIRECT_HOSTS || getApplicationCallbackHost())
     .split(',')
     .map(a => a.toLowerCase());
 };
@@ -33,5 +33,6 @@ export default {
   applicationCallbackHost: getApplicationCallbackHost(),
   authenticatorCallbackHost: getAuthenticatorCallbackHost(),
   applicationLogoutURL: getApplicationLogourURL(),
-  allowedRedirectHosts: getAllowedRedirectHosts()
+  allowedRedirectHosts: getAllowedRedirectHosts(),
+  devMode: process.env.NODE_ENV === 'development'
 } as MainConfig;
