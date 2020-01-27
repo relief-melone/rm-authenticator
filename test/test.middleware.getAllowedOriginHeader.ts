@@ -12,7 +12,7 @@ describe('getAllowedOriginHeader', () => {
     } as any;
 
     const mainConfig = {
-      devMode: true
+      isDevMode: true
     } as any as MainConfig;
 
     // Assert
@@ -26,7 +26,7 @@ describe('getAllowedOriginHeader', () => {
     } as any;
 
     const mainConfig = {
-      devMode: true
+      isDevMode: true
     } as any as MainConfig;
 
     // Assert
@@ -40,7 +40,7 @@ describe('getAllowedOriginHeader', () => {
     } as any;
 
     const mainConfig = {
-      devMode: false,
+      isDevMode: false,
       allowedRedirectHosts: ['localhost','allowed-host.com']
     } as any as MainConfig;
 
@@ -55,7 +55,7 @@ describe('getAllowedOriginHeader', () => {
     } as any;
 
     const mainConfig = {
-      devMode: false,
+      isDevMode: false,
       allowedRedirectHosts: ['localhost','allowed-host.com']
     } as any as MainConfig;
 

@@ -34,5 +34,5 @@ export default {
   authenticatorCallbackHost: getAuthenticatorCallbackHost(),
   applicationLogoutURL: getApplicationLogourURL(),
   allowedRedirectHosts: getAllowedRedirectHosts(),
-  devMode: process.env.NODE_ENV === 'development'
+  isDevMode: process.env.NODE_ENV === 'development'
 } as MainConfig;

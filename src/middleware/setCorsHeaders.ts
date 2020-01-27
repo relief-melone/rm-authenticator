@@ -12,7 +12,7 @@ export default (req: Request, res: Response, next: NextFunction, mainConfig= Mai
 };
 
 export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): string => {
-  if(configMain.devMode){
+  if(configMain.isDevMode){
     return typeof(req.headers.origin) === 'string' ? req.headers.origin : '*';
   } else {
     if(typeof(req.headers.origin) === 'string'){
