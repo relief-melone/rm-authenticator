@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import getRedirectObject from '../src/services/getProviderRedirectObject';
 import RedirectObject from '@/classes/RedirectObject';
 
-describe('getRedirectObject', () => {
+describe('getProviderRedirectObject', () => {
   it('will return the default values when no overrides have been sent', () => {
     // Assert
     const expected: RedirectObject = {

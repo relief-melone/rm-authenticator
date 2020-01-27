@@ -31,7 +31,9 @@ In the Main section you set the Variables that apply to all providers (\* are re
 
 **APPLICATION_CALLBACK_HOST\*:** Where your front-end resides. This will be the host the authenticator will redirect you to. It is also set automatically in the Repose Access-Control-Allowed-Origin header. Defaults to http://localhost:8080 so it's required if you want to use it for more than testing.
 
-**ALLOWED_REDIRECT_HOSTS\*:** Hosts you may redirect to. So let's assume you want to be able to redirect to your localhost for testing as well as to my-site.com. That would mean the Var would look like *localhost,my-site.com*. Remember that you also need to include the host of your default application callback host in var. See the chapters Usage from Frontend to see how to use the custom redirecting.
+**ALLOWED_REDIRECT_HOSTS:** Hosts you may redirect to. So let's assume you want to be able to redirect to your localhost for testing as well as to my-site.com. That would mean the Var would look like *localhost,my-site.com*. Remember that you also need to include the host of your default application callback host in var. See the chapters Usage from Frontend to see how to use the custom redirecting. If you just need to redirect to the application callback host you can leave this out as it will be set automatically. 
+
+Allowed Redirect Hosts will also be set as Access-Control-Allow-Origin Header for CORS. Except if you have set NODE_ENV to 'development'. In this case the Header will be set to whatever the origin of the request was.
 
 **APPLICATION_LOGOUT_PATH\*:** This is the path the Authenticator will redirect you to when the user logs out. Defaults to /logout
 
