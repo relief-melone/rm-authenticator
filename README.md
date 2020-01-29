@@ -1,8 +1,11 @@
 # RM-AUTHENTICATOR
+## Easy Authentication and Single Sign on in a Container
 
 rm-authenticator is aimed for the use as a Docker Container to make Authentication in Your application easy.
 With one link to it the authenticator will take care of routing to the OAuth-Provers (like Google and Facebook),
-handle the redirection and managing the Session. It's easy to configure with Environment Variables.
+handle the redirection and managing the Session. You are also able to connect multiple Frontends and use rm-authenticator as a single sign on system.
+
+It's easy to configure with just a few Environment Variables.
 
 If you are using Node.js with Express as your packend, you might also want to look at https://github.com/relief-melone/rm-session-populator which is a middleware to easily populate your Request with a user Object containing all the user Information sent from this authenticator
 
@@ -137,9 +140,7 @@ The Authenticator will handle everything from here on and at the end redirect yo
 <a href="http://localhost:8081/auth/google?successRedirect=mysite.com&failureRedirect=my-site.com/error">Login</a>
 ```
 
-After you got redirected you will find the connect.sid Cookie (if you did not rename it with the env var). Now to get the UserInfo behind that session just make a call to the API (i will use axios in this example).
-
-Remember that the host you want to redirect to has to be added in the ALLOWED_REDIRECT_HOSTS Environment Variable
+After you got redirected you will find the connect.sid Cookie (if you did not rename it with the env var). Now to get the UserInfo behind that session just make a call to the API (i will use axios in this example). Every Frontend that's hostname is in ALLOWED_REDIRECT_HOSTS will automatically be able to retrieve that userinfo (remember to fill the variable if you want to connect multiple front ends). There will be ne no need for users to sign on multiple times on different Frontends
 
 ```js
 axios
