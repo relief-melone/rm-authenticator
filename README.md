@@ -128,6 +128,8 @@ openssl rsa -pubout -in private_key.pem -out public_key.pem
 
 You will then use the public key in your backend to verify the tokens. How is descibed in the Docs of [rm-session-populator](https://www.npmjs.com/package/rm-session-populator))
 
+**JWT_EXPIRES_IN:** Expiration time for the Web Token. Uses same syntax as described in [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken). Default Value is "1h"
+
 ### Use directly
 
 If you don't want to start a Dockercontainer you can also start this locally. In the Repos root folder just do.
