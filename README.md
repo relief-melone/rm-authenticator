@@ -26,6 +26,11 @@ where providers are all lowercase google, facebook, etc.
 As mentioned the Configuration is done by setting Environment Variables. You will also find the complete set in
 **.vscode/.env.template** which can be renamed to .env to be used when testing with VSCode.
 
+
+### Running with multiple Domains
+
+It is important to know that by default the Authenticator works just with Cookies. This is completely fine as long as you just want to get user information and handle the login. It will also work if you access Backends implementing the Authenticator (with [rm-session-populator](https://www.npmjs.com/package/rm-session-populator)) and serve it under the same domain. Howeer if you use different domains for the Authenticator and the Backends you want to connect to make sure you configure the Authenticator to use JSON Web Tokens (See section for JWT Environment Variables). This will also increase the performance of your backend as it won't have to revalidate your cookie with the Authenticator on every request because the user information is already present in the token. 
+
 ### Main
 
 In the Main section you set the Variables that apply to all providers (\* are required)
@@ -84,7 +89,7 @@ If you enable persistent storage you will also be able to store and retrieve add
 
 ```js
 axios.post(
-  "//authenticator-url:8081/auth/data/yourKey",
+  "//authenticator-url.com/auth/data/yourKey",
   {
     foo: "Bar"
   },
@@ -95,10 +100,33 @@ axios.post(
 If you want to retrieve that data from the user later just use
 
 ```js
-axios.get("//authenticator-url:8081/auth/data/yourKey", {
+axios.get("//authenticator-url.com/auth/data/yourKey", {
   withCredentials: true
 });
 ```
+
+### JSON Web Tokens
+
+**JWT_ENABLE:** true if you want to enable JSON Web tokens. If enabled the /auth/jwt endpoint will be available and you can get a JWT with a simple get request as an authenticated user. So e.g.
+
+```js
+axios.get("//authenticator-url.com/auth/jwt", {
+  withCredentials: true
+});
+```
+
+**JWT_MODE:** can be set to direct (default value) or key. If set to direct the secret to sign and verify the web token will be taken directly from the environment variable JWT_SECRET. If set to key instead it will read the private key from a location on the file system (/data/private_key.pem as default)
+
+**JWT_SECRET:** Secret to sign and verify the json web tokens. Will be ignored if mode is set to key
+
+**JWT_KEY_LOCATION:** If you use key as mode this will be the direction where your private key is. /data/private_key.pem by default. The algorithm used is RSA SHA256. To create a private public key pair use openssl like this
+
+```sh
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+```
+
+You will then use the public key in your backend to verify the tokens. How is descibed in the Docs of [rm-session-populator](https://www.npmjs.com/package/rm-session-populator))
 
 ### Use directly
 
