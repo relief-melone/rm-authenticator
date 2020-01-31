@@ -8,6 +8,8 @@ import data from './data.mongodb';
 import configMongodb from '../config/config.mongodb';
 import controllerAuthCallback from '@/controller/controller.auth.callback';
 import configMain from '../config/config.main';
+import configJwt from '@/config/config.jwt';
+import controllerAuthJwt from '@/controller/controller.auth.jwt';
 
 const router = Router();
 
@@ -79,5 +81,10 @@ router.get('/logout', (req: Request, res: Response, next: NextFunction): void =>
   res.redirect(req.session.redirect.logout);
   return;
 });
+
+
+if(configJwt.isJwtEnabled){
+  router.get('/jwt', controllerAuthJwt);
+}
 
 export default router;
