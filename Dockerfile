@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:12-slim
 USER root
 
 WORKDIR /app
@@ -6,7 +6,7 @@ COPY . .
 RUN npm --version && node --version
 
 RUN npm install
-RUN ./node_modules/.bin/tsc --watch false
+RUN npm run build
 
 EXPOSE 8081
 
