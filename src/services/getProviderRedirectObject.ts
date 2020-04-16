@@ -5,6 +5,7 @@ import ConfigFacebook from '@/config/config.facebook';
 import ConfigGoogle from '@/config/config.google';
 import ConfigLinkedin from '@/config/config.linkedin';
 import { ProviderAndLogout } from '@/classes/Provider';
+import logger from './log/logger';
 
 export default (
   providerOrLogout: ProviderAndLogout,
@@ -41,6 +42,14 @@ export default (
     !configMain.allowedRedirectHosts.some(hostname => hostname === failure.hostname) ||
     !configMain.allowedRedirectHosts.some(hostname => hostname === logout.hostname)
   ){
+    logger.info('Redirect was not allowed', {
+      allowedHosts: configMain.allowedRedirectHosts,
+      hostnames: {
+        success: success.hostname,
+        failure: failure.hostname,
+        logout: logout.hostname
+      }
+    });
     throw 'Redirect not allowed';        
   }
   
