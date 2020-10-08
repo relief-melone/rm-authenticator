@@ -15,8 +15,7 @@
 # temp
 temp/
 
-/.vscode/.env
-/.vscode/archive
+/.vscode
 
 # Package-lock
 # package-lock.json

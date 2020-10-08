@@ -19,9 +19,13 @@ export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): s
       const url = urlParse(req.headers.origin);
       if(configMain.allowedRedirectHosts.indexOf(url.hostname) !== -1){
         return req.headers.origin;
+      } else {
+        console.log(`Unauthorized request from ${url.hostname}`);
+        console.log('Allowed hosts are');
+        console.log(configMain.allowedRedirectHosts);
       }
     } 
-
+    
     return '';
        
   }
