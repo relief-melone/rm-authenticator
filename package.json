@@ -1,6 +1,6 @@
 {
   "name": "rm-authenticator",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Authentication Application",
   "main": "./dist/app.js",
   "scripts": {
