@@ -1,8 +1,8 @@
 {
   "name": "rm-authenticator",
-  "version": "1.6.2",
+  "version": "1.6.5",
   "description": "Authentication Application",
-  "main": "./dist/app.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "node ./dist/index.js",
     "test": "./node_modules/.bin/mocha",
@@ -14,7 +14,7 @@
   },
   "_moduleAliases": {
     "@": "./dist/src",
-    "@test": "./disttest",
+    "@test": "./dist/test",
     "@root": "./dist"
   },
   "repository": {
