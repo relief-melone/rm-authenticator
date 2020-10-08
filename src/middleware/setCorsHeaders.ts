@@ -13,12 +13,12 @@ export default (req: Request, res: Response, next: NextFunction, mainConfig= Mai
 
 export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): string => {
   if(configMain.isDevMode){
-    return typeof(req.headers.origin) === 'string' ? req.headers.origin : '*';
+    return typeof(req.hostname) === 'string' ? req.hostname : '*';
   } else {
-    if(typeof(req.headers.origin) === 'string'){
-      const url = urlParse(req.headers.origin);
+    if(typeof(req.hostname) === 'string'){
+      const url = urlParse(req.hostname);
       if(configMain.allowedRedirectHosts.indexOf(url.hostname) !== -1){
-        return req.headers.origin;
+        return req.hostname;
       } else {
         console.log(`Unauthorized request from ${url.hostname}`);
         console.log('Allowed hosts are');
