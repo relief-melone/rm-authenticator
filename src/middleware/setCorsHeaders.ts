@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import MainConfig from '@/config/config.main';
-import urlParse from 'url-parse';
 
 export default (req: Request, res: Response, next: NextFunction, mainConfig= MainConfig): void => {
   res.header('Access-Control-Allow-Origin', getAllowedOriginHeader(req, mainConfig));
