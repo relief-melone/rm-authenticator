@@ -16,11 +16,9 @@ export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): s
     return typeof(req.hostname) === 'string' ? req.hostname : '*';
   } else {
     if(typeof(req.hostname) === 'string'){      
-      if(configMain.allowedRedirectHosts.indexOf(req.hostname) !== -1){
-        return req.hostname;
-    } 
-    
-    return '';
-       
+      if(configMain.allowedRedirectHosts.indexOf(req.hostname) !== -1)
+        return req.hostname;        
+    }
   }
+  return '';
 };
