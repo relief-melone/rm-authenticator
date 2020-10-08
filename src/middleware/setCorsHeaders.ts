@@ -15,12 +15,11 @@ export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): s
   if(configMain.isDevMode){
     return typeof(req.hostname) === 'string' ? req.hostname : '*';
   } else {
-    if(typeof(req.hostname) === 'string'){
-      const url = urlParse(req.hostname);
-      if(configMain.allowedRedirectHosts.indexOf(url.hostname) !== -1){
+    if(typeof(req.hostname) === 'string'){      
+      if(configMain.allowedRedirectHosts.indexOf(req.hostname) !== -1){
         return req.hostname;
       } else {
-        console.log(`Unauthorized request from ${url.hostname}`);
+        console.log(`Unauthorized request from ${req.hostname}`);
         console.log('Allowed hosts are');
         console.log(configMain.allowedRedirectHosts);
       }
