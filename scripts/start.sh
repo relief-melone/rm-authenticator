@@ -4,7 +4,7 @@ echo "Current Environment: $NODE_ENV"
 if [[ $NODE_ENV == "development" ]]; then
   echo "RUNNING SERVER IN DEVELOPMENT MODE"
   npm run dev
-else if [[ $NODE_ENV == "debug" ]]; then
+elif [[ $NODE_ENV == "debug" ]]; then
   echo "RUNNING SERVER IN DEBUG MODE"
   npm run debug
 else
