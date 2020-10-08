@@ -5,6 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // for this to work, the port 9229 from that container has to be forwarded to localhost
+      "type": "node",
+      "request": "attach",
+      "name": "connect to docker container",
+      "address": "localhost",
+      "port": 9229,
+      "localRoot": "${workspaceFolder}/dist",
+      "remoteRoot": "/app/dist",
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Mocha Tests",

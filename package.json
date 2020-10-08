@@ -8,7 +8,7 @@
     "test": "./node_modules/.bin/mocha",
     "dev": "./node_modules/.bin/tsc-watch --onSuccess \"node --inspect=9229 ./dist/index.js\"",
     "coverage": "./node_modules/.bin/nyc npm run test",
-    "build": "./node_modules/.bin/tsc --watch false -d",
+    "build": "./node_modules/.bin/tsc --watch false",
     "lint": "./node_modules/.bin/eslint --ignore-path .gitignore .",
     "tsc": "./node_modules/.bin/tsc"
   },
