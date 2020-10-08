@@ -5,11 +5,9 @@ import MainConfig from '@/classes/MainConfig';
 import { expect } from 'chai';
 
 describe('getAllowedOriginHeader', () => {
-  it('will correctly get * if dev mode but no origin in header', () => {
+  it('will correctly get * if dev mode but no hostname is present', () => {
     // Prepare
-    const req = {
-      headers : { origin: undefined }
-    } as any;
+    const req = { hostname: undefined } as any;
 
     const mainConfig = {
       isDevMode: true
@@ -22,7 +20,7 @@ describe('getAllowedOriginHeader', () => {
   it('will correctly get current origin if dev mode and origin in header', () => {
     // Prepare
     const req = {
-      headers : { origin: 'http://current.origin.com' }
+      hostname: 'current.origin.com'
     } as any;
 
     const mainConfig = {
@@ -30,13 +28,13 @@ describe('getAllowedOriginHeader', () => {
     } as any as MainConfig;
 
     // Assert
-    expect(getAllowedOriginHeader(req, mainConfig)).to.equal('http://current.origin.com');
+    expect(getAllowedOriginHeader(req, mainConfig)).to.equal('current.origin.com');
   });
 
   it('will correctly get empty string if dev mode off and origin not in allowed hosts', () => {
     // Prepare
     const req = {
-      headers : { origin: 'http://forbidden-host.com' }
+      hostname: 'forbidden-host.com'
     } as any;
 
     const mainConfig = {
@@ -51,7 +49,7 @@ describe('getAllowedOriginHeader', () => {
   it('will correctly get current origin string if dev mode off and origin  in allowed hosts', () => {
     // Prepare
     const req = {
-      headers : { origin: 'https://allowed-host.com' }
+      hostname: 'allowed-host.com'
     } as any;
 
     const mainConfig = {
@@ -60,7 +58,7 @@ describe('getAllowedOriginHeader', () => {
     } as any as MainConfig;
 
     // Assert
-    expect(getAllowedOriginHeader(req, mainConfig)).to.equal('https://allowed-host.com');
+    expect(getAllowedOriginHeader(req, mainConfig)).to.equal('allowed-host.com');
   });
 
 });
