@@ -15,8 +15,7 @@
 # temp
 temp/
 
-/.vscode/.env
-/.vscode/archive
+/.vscode
 
 # Whitelist
 !.eslintrc.js

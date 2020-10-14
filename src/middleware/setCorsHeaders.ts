@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import MainConfig from '@/config/config.main';
-import urlParse from 'url-parse';
 
 export default (req: Request, res: Response, next: NextFunction, mainConfig= MainConfig): void => {
   res.header('Access-Control-Allow-Origin', getAllowedOriginHeader(req, mainConfig));
@@ -13,16 +12,12 @@ export default (req: Request, res: Response, next: NextFunction, mainConfig= Mai
 
 export const getAllowedOriginHeader = (req: Request, configMain = MainConfig): string => {
   if(configMain.isDevMode){
-    return typeof(req.headers.origin) === 'string' ? req.headers.origin : '*';
+    return typeof(req.hostname) === 'string' ? req.hostname : '*';
   } else {
-    if(typeof(req.headers.origin) === 'string'){
-      const url = urlParse(req.headers.origin);
-      if(configMain.allowedRedirectHosts.indexOf(url.hostname) !== -1){
-        return req.headers.origin;
-      }
-    } 
-
-    return '';
-       
+    if(typeof(req.hostname) === 'string'){      
+      if(configMain.allowedRedirectHosts.indexOf(req.hostname) !== -1)
+        return req.hostname;        
+    }
   }
+  return '';
 };

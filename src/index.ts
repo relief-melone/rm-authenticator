@@ -35,7 +35,7 @@ export default (): void => {
   app.use('/auth', authRoutes);
 
   app.get('/', (req, res, next) => {
-    res.render('<h1>Welcome to the RM-Authenticator</h1>');
+    res.send('<h1>Welcome to the RM-Authenticator</h1>');
   });
 
   app.get('/userinfo', (req, res, next) => {

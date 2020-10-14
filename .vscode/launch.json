@@ -5,6 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // for this to work, the port 9229 from that container has to be forwarded to localhost
+      "type": "node",
+      "request": "attach",
+      "name": "connect to docker container",
+      "address": "localhost",
+      "port": 9229,
+      "localRoot": "${workspaceFolder}/dist",
+      "remoteRoot": "/app/dist",
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Mocha Tests",
@@ -15,9 +29,35 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/dist/app.js",
+      "program": "${workspaceFolder}/dist/index.js",
       "outFiles": ["${workspaceFolder}/**/*.js"],
       "envFile": "${workspaceFolder}/.vscode/.env"
-    }
+    },{
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "/root/.nvm/versions/node/v14.12.0/bin/node",
+      "name": "Unit Tests (WSL)",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Launch Program (WSL)",
+      "envFile": "${workspaceFolder}/.vscode/.env",
+      "runtimeExecutable": "/root/.nvm/versions/node/v14.12.0/bin/node",
+      "program": "${workspaceFolder}/dist/index.js",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
   ]
 }

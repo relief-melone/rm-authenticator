@@ -9,13 +9,8 @@ export default (getEnabled(Database.mongodb)
     const user = env.MONGODB_USER;
     const password = env.MONGODB_PASSWORD;
 
-    return {
-      host,
-      port,
-      db,
-      user,
-      password,
-      connectionString: `mongodb://${user}:${password}@${host}:${port}/${db}`
-    };
+    const connectionString = env.MONGODB_CONNECTION_STRING || `mongodb://${user}:${password}@${host}:${port}/${db}`;
+
+    return { connectionString };
   }
   : (): null => null);
