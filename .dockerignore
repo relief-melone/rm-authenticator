@@ -17,8 +17,5 @@ temp/
 
 /.vscode
 
-# Package-lock
-# package-lock.json
-
 # Whitelist
 !.eslintrc.js
